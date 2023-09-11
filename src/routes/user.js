@@ -32,9 +32,9 @@ router.get("/users/:id", (req, res) => {
 // delete a user
 router.delete("/users/:id", (req, res) => {
   const { id } = req.params;
-  const { idrol, nombrerol, descrol, permisosrol } = req.body;
+  const { name, age, email } = req.body;
   userSchema
-    .deleteOne({ _id: id }, {$unset: { idrol, nombrerol, descrol, permisosrol } })
+    .deleteOne({ _id: id }, {$unset: { name, age, email } })
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
@@ -44,10 +44,10 @@ router.delete("/users/:id", (req, res) => {
 
 // update a user
 router.put("/users/:id", (req, res) => {
-  const { id } = req.params;
-  const { idrol, nombrerol, descrol, permisosrol } = req.body;
+  const { id } = req.body;
+  const { name, age, email } = req.body;
   userSchema
-    .updateOne({ _id: id }, { $set: { idrol, nombrerol, descrol, permisosrol } })
+    .updateOne({ _id: id }, { $set: { name, age, email } })
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 });
